@@ -1,0 +1,23 @@
+{
+  "translation": {
+    "message": "Hello, I am a message.",
+    "message_ios": "Hello, I am a message from iOS.",
+    "message_android": "Hello, I am a message from Android.",
+    "message_web": "Hello, I am a message from Web.",
+    "reaction": "{{count}} people reacted.",
+    "reaction_one": "Only one person reacted.",
+    "reaction_zero": "No one reacted.",
+    "list": [
+      {
+        "title": "Title 1 Lorem ipsum dolor sit amet",
+        "description": "Description 1 Lorem ipsum dolor sit amet"
+      },
+      {
+        "title": "Title 2 Lorem ipsum dolor sit amet"
+      },
+      {
+        "description": "Description 3 Lorem ipsum dolor sit amet"
+      }
+    ]
+  }
+}
