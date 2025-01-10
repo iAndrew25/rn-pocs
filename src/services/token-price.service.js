@@ -1,13 +1,10 @@
-import {getTokenPrices} from '@config/api';
-import {useTokenPrice} from '@config/store';
+import {getTokenPrices} from 'config/api';
+import {useTokenPrice} from 'config/store';
 
 class TokenPriceServiceClass {
   tokensList = [];
 
   addToken = token => {
-    if (this.tokensList.includes(token)) {
-      return;
-    }
     console.log(
       'TokenPriceServiceClass::addToken::calls',
       token,

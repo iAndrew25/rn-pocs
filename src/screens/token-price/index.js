@@ -9,7 +9,7 @@ const randomTokensList = Array(100)
   .map((_, i) => i + 1);
 
 const getRandomTokens = () =>
-  Array(1)
+  Array(5)
     .fill()
     .map(() => getRandomFromList(randomTokensList));
 
@@ -43,12 +43,14 @@ function TokenPrice() {
 }
 
 const ListItem = React.memo(({tokenId}) => {
-  useCountRenders(`ListItem ${tokenId}`);
+  const count = useCountRenders(`ListItem ${tokenId}`);
   const tokenPrice = useTokenPrice(tokenPriceSelector(tokenId));
 
   return (
     <View style={styles.listItem}>
-      <Text>ListItem {tokenId}</Text>
+      <Text>
+        {count} - ListItem {tokenId}
+      </Text>
       <Text>
         {tokenPrice?.hasError ? 'Error' : tokenPrice?.price || 'Loading'}
       </Text>

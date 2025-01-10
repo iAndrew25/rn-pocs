@@ -2,18 +2,8 @@ import {create} from 'zustand';
 import {createSelector} from 'reselect';
 import {TokenPriceService} from 'services/token-price.service';
 
-export const useTokenPrice = create((set, get) => ({
+export const useTokenPrice = create(set => ({
   tokenPrice: {},
-  getTokenPrice: id => {
-    const tokenPrice = get().tokenPrice[id];
-
-    if (tokenPrice) {
-      return tokenPrice;
-    } else {
-      TokenPriceService.addToken(id);
-      return undefined;
-    }
-  },
   setTokenPrices: tokenPrices => {
     set(state => ({
       tokenPrice: {
