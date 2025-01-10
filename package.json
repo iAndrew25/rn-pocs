@@ -16,7 +16,9 @@
     "react-i18next": "^15.0.1",
     "react-native": "0.74.2",
     "react-native-svg": "^15.3.0",
-    "svgtofont": "^4.2.1"
+    "reselect": "^5.1.1",
+    "svgtofont": "^4.2.1",
+    "zustand": "^5.0.3"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
