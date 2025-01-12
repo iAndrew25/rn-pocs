@@ -1,83 +1,34 @@
 import React, {Fragment, useState} from 'react';
-import {Text, View, StyleSheet} from 'react-native';
 
-import {getRandomFromList, useCountRenders} from 'utils';
-import {useTokenPrice, tokenPriceSelector} from 'config/store';
+import Tabs from '../../components/tabs';
 
-const randomTokensList = Array(100)
-  .fill()
-  .map((_, i) => i + 1);
+import Playground from './playground';
+import Pagination from './pagination';
 
-const getRandomTokens = () =>
-  Array(5)
-    .fill()
-    .map(() => getRandomFromList(randomTokensList));
+const routes = ['Playground', 'Pagination'];
 
 function TokenPrice() {
-  const [tokensList, setTokensList] = useState([]);
+  const [route, setRoute] = useState('');
 
-  const handleOnAddNewTokens = () => {
-    const newTokens = getRandomTokens();
-    setTokensList(prevTokensList => [...prevTokensList, ...newTokens]);
-  };
+  const renderHome = () => null;
 
-  const handleOnClearTokens = () => {
-    setTokensList([]);
+  const renderContent = () => {
+    switch (route) {
+      case 'Playground':
+        return <Playground />;
+      case 'Pagination':
+        return <Pagination />;
+      default:
+        return renderHome();
+    }
   };
 
   return (
     <Fragment>
-      <View style={styles.header}>
-        <View style={styles.buttons}>
-          <Text onPress={handleOnClearTokens}>Clear token prices</Text>
-          <Text onPress={handleOnAddNewTokens}>Add new tokens</Text>
-        </View>
-        <View style={styles.listItemWrapper}>
-          {tokensList.map(token => (
-            <ListItem key={token} tokenId={token} />
-          ))}
-        </View>
-      </View>
+      <Tabs selectedTab={route} tabs={routes} setSelectedTab={setRoute} />
+      {renderContent()}
     </Fragment>
   );
 }
-
-const ListItem = React.memo(({tokenId}) => {
-  const count = useCountRenders(`ListItem ${tokenId}`);
-  const tokenPrice = useTokenPrice(tokenPriceSelector(tokenId));
-
-  return (
-    <View style={styles.listItem}>
-      <Text>
-        {count} - ListItem {tokenId}
-      </Text>
-      <Text>
-        {tokenPrice?.hasError ? 'Error' : tokenPrice?.price || 'Loading'}
-      </Text>
-    </View>
-  );
-});
-
-const styles = StyleSheet.create({
-  header: {
-    marginHorizontal: 16,
-  },
-  buttons: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    gap: 16,
-    marginBottom: 8,
-  },
-  listItem: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    padding: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: '#e0e0e0',
-  },
-  listItemWrapper: {
-    marginTop: 16,
-  },
-});
 
 export default TokenPrice;
